@@ -63,11 +63,11 @@ export class Post {
     this.id = value;
   }
 
-  public getName(): string {
+  public getBody(): string {
     return this.body;
   }
 
-  public setName(value: string): void {
+  public setBody(value: string): void {
     this.body = value;
   }
 
