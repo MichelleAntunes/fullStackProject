@@ -1,6 +1,6 @@
 import {
   LikeDislikeDB,
-  PLAYLIST_LIKE,
+  POST_LIKE,
   PostDB,
   PostDBWithCreatorName,
 } from "../models/Post";
@@ -47,10 +47,10 @@ export class PostDatabase extends BaseDatabase {
     return result as PostDB | undefined;
   };
 
-  public updatePost = async (playlistDB: PostDB): Promise<void> => {
+  public updatePost = async (postDB: PostDB): Promise<void> => {
     await BaseDatabase.connection(PostDatabase.TABLE_POST)
-      .update(playlistDB)
-      .where({ id: playlistDB.id });
+      .update(postDB)
+      .where({ id: postDB.id });
   };
 
   public deletePostById = async (id: string): Promise<void> => {
@@ -86,7 +86,7 @@ export class PostDatabase extends BaseDatabase {
 
   public findLikeDislike = async (
     likeDislikeDB: LikeDislikeDB
-  ): Promise<PLAYLIST_LIKE | undefined> => {
+  ): Promise<POST_LIKE | undefined> => {
     const [result]: Array<LikeDislikeDB | undefined> =
       await BaseDatabase.connection(PostDatabase.TABLE_LIKES_DISLIKES)
         .select()
@@ -98,9 +98,9 @@ export class PostDatabase extends BaseDatabase {
     if (result === undefined) {
       return undefined;
     } else if (result.like === 1) {
-      return PLAYLIST_LIKE.ALREADY_LIKED;
+      return POST_LIKE.ALREADY_LIKED;
     } else {
-      return PLAYLIST_LIKE.ALREADY_DISLIKED;
+      return POST_LIKE.ALREADY_DISLIKED;
     }
   };
 
