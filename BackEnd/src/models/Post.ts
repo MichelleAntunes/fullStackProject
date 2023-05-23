@@ -38,7 +38,7 @@ export interface LikeDislikeDB {
   like: number;
 }
 
-export enum PLAYLIST_LIKE {
+export enum POST_LIKE {
   ALREADY_LIKED = "ALREADY LIKED",
   ALREADY_DISLIKED = "ALREADY DISLIKED",
 }
