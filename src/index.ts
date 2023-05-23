@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { userRouter } from "./router/UserRouter";
 import { postRouter } from "./router/postRouter";
+import { commentRouter } from "./router/commentRouter";
 
 dotenv.config();
 
@@ -19,6 +20,4 @@ app.use("/users", userRouter);
 
 app.use("/post", postRouter);
 
-app.get("/ping", (req, res) => {
-  res.send("Pong!");
-});
+app.use("/comments", commentRouter);
