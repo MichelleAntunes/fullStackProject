@@ -6,6 +6,7 @@ export interface PostDB {
   dislikes: number;
   created_at: string;
   updated_at: string;
+  comment: number;
 }
 
 export interface PostDBWithCreatorName {
@@ -17,6 +18,7 @@ export interface PostDBWithCreatorName {
   created_at: string;
   updated_at: string;
   creator_name: string;
+  comment: number;
 }
 
 export interface PostModel {
@@ -24,6 +26,7 @@ export interface PostModel {
   body: string;
   likes: number;
   dislikes: number;
+  comment: number;
   createdAt: string;
   updatedAt: string;
   creator: {
@@ -49,6 +52,7 @@ export class Post {
     private body: string,
     private likes: number,
     private dislikes: number,
+    private comment: number,
     private createdAt: string,
     private updatedAt: string,
     private creatorId: string,
@@ -61,6 +65,19 @@ export class Post {
 
   public setId(value: string): void {
     this.id = value;
+  }
+  public getComment(): number {
+    return this.comment;
+  }
+
+  public setComments(value: number) {
+    this.comment = value;
+  }
+  public addComment(): void {
+    this.comment++;
+  }
+  public removeComment(): void {
+    this.comment--;
   }
 
   public getBody(): string {
@@ -143,6 +160,7 @@ export class Post {
       likes: this.likes,
       dislikes: this.dislikes,
       created_at: this.createdAt,
+      comment: this.comment,
       updated_at: this.updatedAt,
     };
   }
@@ -153,6 +171,7 @@ export class Post {
       body: this.body,
       likes: this.likes,
       dislikes: this.dislikes,
+      comment: this.comment,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       creator: {
