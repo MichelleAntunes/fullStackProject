@@ -69,7 +69,7 @@ $ npm run dev
 
 ## Autoria
 
-Michelle Antunes, abril/2023.
+Michelle Antunes, maio/2023.
 <br>
 
 Linkedin: www.linkedin.com/in/michelle-antunes-868b24156
