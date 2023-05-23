@@ -5,15 +5,15 @@ import { PostDatabase } from "../database/PostDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 
-export const posttRouter = express.Router();
+export const postRouter = express.Router();
 
 const postController = new PostController(
   new PostBusiness(new PostDatabase(), new IdGenerator(), new TokenManager())
 );
 
-posttRouter.post("/", postController.createPost);
-posttRouter.get("/", postController.getPost);
-posttRouter.put("/:id", postController.editPost);
-posttRouter.delete("/:id", postController.deletePost);
+postRouter.post("/", postController.createPost);
+postRouter.get("/", postController.getPost);
+postRouter.put("/:id", postController.editPost);
+postRouter.delete("/:id", postController.deletePost);
 
-posttRouter.put("/:id/like", postController.likeOrDislikePost);
+postRouter.put("/:id/like", postController.likeOrDislikePost);
