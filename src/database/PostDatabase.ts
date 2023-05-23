@@ -27,7 +27,7 @@ export class PostDatabase extends BaseDatabase {
         `${PostDatabase.TABLE_POST}.dislikes`,
         `${PostDatabase.TABLE_POST}.created_at`,
         `${PostDatabase.TABLE_POST}.updated_at`,
-        `${UserDatabase.TABLE_USERS}.body as creator_name`
+        `${UserDatabase.TABLE_USERS}.name as creator_name`
       )
       .join(
         `${UserDatabase.TABLE_USERS}`,
@@ -66,7 +66,7 @@ export class PostDatabase extends BaseDatabase {
       .select(
         `${PostDatabase.TABLE_POST}.id`,
         `${PostDatabase.TABLE_POST}.creator_id`,
-        `${PostDatabase.TABLE_POST}.name`,
+        `${PostDatabase.TABLE_POST}.body`,
         `${PostDatabase.TABLE_POST}.likes`,
         `${PostDatabase.TABLE_POST}.dislikes`,
         `${PostDatabase.TABLE_POST}.created_at`,
