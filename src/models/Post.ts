@@ -6,19 +6,11 @@ export interface PostDB {
   dislikes: number;
   created_at: string;
   updated_at: string;
-  comment: number;
+  comments: number;
 }
 
-export interface PostDBWithCreatorName {
-  id: string;
-  creator_id: string;
-  body: string;
-  likes: number;
-  dislikes: number;
-  created_at: string;
-  updated_at: string;
+export interface PostDBWithCreatorName extends PostDB {
   creator_name: string;
-  comment: number;
 }
 
 export interface PostModel {
@@ -26,7 +18,7 @@ export interface PostModel {
   body: string;
   likes: number;
   dislikes: number;
-  comment: number;
+  comments: number;
   createdAt: string;
   updatedAt: string;
   creator: {
@@ -52,7 +44,7 @@ export class Post {
     private body: string,
     private likes: number,
     private dislikes: number,
-    private comment: number,
+    private comments: number,
     private createdAt: string,
     private updatedAt: string,
     private creatorId: string,
@@ -67,17 +59,17 @@ export class Post {
     this.id = value;
   }
   public getComment(): number {
-    return this.comment;
+    return this.comments;
   }
 
   public setComments(value: number) {
-    this.comment = value;
+    this.comments = value;
   }
   public addComment(): void {
-    this.comment++;
+    this.comments++;
   }
   public removeComment(): void {
-    this.comment--;
+    this.comments--;
   }
 
   public getBody(): string {
@@ -160,7 +152,7 @@ export class Post {
       likes: this.likes,
       dislikes: this.dislikes,
       created_at: this.createdAt,
-      comment: this.comment,
+      comments: this.comments,
       updated_at: this.updatedAt,
     };
   }
@@ -171,7 +163,7 @@ export class Post {
       body: this.body,
       likes: this.likes,
       dislikes: this.dislikes,
-      comment: this.comment,
+      comments: this.comments,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       creator: {
