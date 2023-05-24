@@ -1,3 +1,5 @@
+import { CommentModel, CommentWithCreatorDB } from "./Comment";
+
 export interface PostDB {
   id: string;
   creator_id: string;
@@ -8,9 +10,34 @@ export interface PostDB {
   updated_at: string;
   comments: number;
 }
-
 export interface PostDBWithCreatorName extends PostDB {
   creator_name: string;
+}
+export interface PostWithCommentsDB {
+  id: string;
+  content: string;
+  comments: number;
+  likes: number;
+  dislikes: number;
+  created_at: string;
+  updated_at: string;
+  creator_id: string;
+  creator_username: string;
+  comments_post: CommentWithCreatorDB[];
+}
+export interface PostWithCommentsModel {
+  id: string;
+  content: string;
+  comments: number;
+  likes: number;
+  dislikes: number;
+  createdAt: string;
+  updatedAt: string;
+  creator: {
+    id: string;
+    username: string;
+  };
+  commentsPost: CommentModel[];
 }
 
 export interface PostModel {
@@ -28,6 +55,11 @@ export interface PostModel {
 }
 
 export interface LikeDislikeDB {
+  user_id: string;
+  post_id: string;
+  like: number;
+}
+export interface LikeDislikePostDB {
   user_id: string;
   post_id: string;
   like: number;
@@ -170,6 +202,24 @@ export class Post {
         id: this.creatorId,
         name: this.creatorName,
       },
+    };
+  }
+  public toBusinessModelWithComments(
+    commentsPost: CommentModel[]
+  ): PostWithCommentsModel {
+    return {
+      id: this.id,
+      content: this.body,
+      comments: this.comments,
+      likes: this.likes,
+      dislikes: this.dislikes,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      creator: {
+        id: this.creatorId,
+        username: this.creatorName,
+      },
+      commentsPost: commentsPost,
     };
   }
 }

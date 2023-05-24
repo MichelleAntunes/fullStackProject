@@ -10,14 +10,25 @@ import {
 import { EditPostInputDTO, EditPostOutputDTO } from "../dtos/post/editPost.dto";
 import { GetPostInputDTO, GetPostOutputDTO } from "../dtos/post/getPost.dto";
 import {
+  GetPostWithCommentsByIdInputDTO,
+  GetPostWithCommentsByIdOutputDTO,
+} from "../dtos/post/getPostWithCommentsById.dto";
+import {
   LikeOrDislikePostInputDTO,
   LikeOrDislikePostOutputDTO,
 } from "../dtos/post/likeOrDislikePost.dto";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
-import { LikeDislikeDB, POST_LIKE, Post } from "../models/Post";
-import { USER_ROLES } from "../models/User";
+import { Comment, CommentModel } from "../models/Comment";
+import {
+  LikeDislikeDB,
+  POST_LIKE,
+  Post,
+  PostWithCommentsDB,
+  PostWithCommentsModel,
+} from "../models/Post";
+import { TokenPayload, USER_ROLES } from "../models/User";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
 
@@ -59,6 +70,62 @@ export class PostBusiness {
     const output: CreatePostOutputDTO = undefined;
 
     return output;
+  };
+  public getPostWithCommentsById = async (
+    input: GetPostWithCommentsByIdInputDTO
+  ): Promise<GetPostWithCommentsByIdOutputDTO> => {
+    const { postId, token } = input;
+
+    const payload: TokenPayload | null = this.tokenManager.getPayload(token);
+
+    if (!payload) {
+      throw new UnauthorizedError();
+    }
+
+    const postWithCommentsDB: PostWithCommentsDB | undefined =
+      await this.postDatabase.getPostWithCreatorAndCommentsById(postId);
+
+    if (!postWithCommentsDB) {
+      throw new NotFoundError(
+        "Post não encontrado. Verifique o id e tente novamente."
+      );
+    }
+
+    const commentsInPost: CommentModel[] = postWithCommentsDB.comments_post.map(
+      (commentDB) => {
+        const comment = new Comment(
+          commentDB.id,
+          commentDB.post_id,
+          commentDB.content,
+          commentDB.likes,
+          commentDB.dislikes,
+          commentDB.created_at,
+          commentDB.updated_at,
+          commentDB.creator_id,
+          commentDB.creator_username
+        );
+
+        return comment.toBusinessModel();
+      }
+    );
+
+    const post = new Post(
+      postWithCommentsDB.id,
+      postWithCommentsDB.content,
+      postWithCommentsDB.comments,
+      postWithCommentsDB.likes,
+      postWithCommentsDB.dislikes,
+      postWithCommentsDB.created_at,
+      postWithCommentsDB.updated_at,
+      postWithCommentsDB.creator_id,
+      postWithCommentsDB.creator_username
+    );
+
+    const postWithCommentsModel: PostWithCommentsModel =
+      post.toBusinessModelWithComments(commentsInPost);
+
+    const output: GetPostWithCommentsByIdOutputDTO = postWithCommentsModel;
+    return output as GetPostWithCommentsByIdOutputDTO;
   };
 
   public getPosts = async (
