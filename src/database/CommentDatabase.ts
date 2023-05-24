@@ -63,7 +63,7 @@ export class CommentDatabase extends BaseDatabase {
         `${CommentDatabase.TABLE_COMMENTS}.created_at`,
         `${CommentDatabase.TABLE_COMMENTS}.updated_at`,
         `${CommentDatabase.TABLE_COMMENTS}.creator_id`,
-        `${UserDatabase.TABLE_USERS}.username AS creator_name`
+        `${UserDatabase.TABLE_USERS}.name AS creator_name`
       )
       .join(
         `${UserDatabase.TABLE_USERS}`,
