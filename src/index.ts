@@ -17,7 +17,5 @@ app.listen(Number(process.env.PORT) || 3003, () => {
 });
 
 app.use("/users", userRouter);
-
-app.use("/post", postRouter);
-
-app.use("/comments", commentRouter);
+app.use("/posts", postRouter);
+app.use("/posts", commentRouter);
