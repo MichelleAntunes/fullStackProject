@@ -5,19 +5,19 @@ import { TokenManager } from "../services/TokenManager";
 import {
   CreateCommentInputDTO,
   CreateCommentOutputDTO,
-} from "../dtos/Comment/createComment.dto";
+} from "../dtos/comment/createComment.dto";
 import {
   DeleteCommentByIdInputDTO,
   DeleteCommentByIdOutputDTO,
-} from "../dtos/Comment/deleteCommentById.dto";
+} from "../dtos/comment/deleteCommentById.dto";
 import {
   EditCommentByIdInputDTO,
   EditCommentByIdOutputDTO,
-} from "../dtos/Comment/editComment.dto";
+} from "../dtos/comment/editComment.dto";
 import {
   LikeOrDislikeCommentInputDTO,
   LikeOrDislikeCommentOutputDTO,
-} from "../dtos/Comment/likeOrDislikeComment.dto";
+} from "../dtos/comment/likeOrDislikeComment.dto";
 import {
   COMMENT_LIKE,
   Comment,

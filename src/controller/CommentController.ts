@@ -6,22 +6,22 @@ import {
   CreateCommentInputDTO,
   CreateCommentOutputDTO,
   CreateCommentSchema,
-} from "../dtos/Comment/createComment.dto";
+} from "../dtos/comment/createComment.dto";
 import {
   EditCommentByIdInputDTO,
   EditCommentByIdOutputDTO,
   EditCommentByIdSchema,
-} from "../dtos/Comment/editComment.dto";
+} from "../dtos/comment/editComment.dto";
 import {
   DeleteCommentByIdInputDTO,
   DeleteCommentByIdOutputDTO,
   DeleteCommentByIdSchema,
-} from "../dtos/Comment/deleteCommentById.dto";
+} from "../dtos/comment/deleteCommentById.dto";
 import {
   LikeOrDislikeCommentInputDTO,
   LikeOrDislikeCommentOutputDTO,
   LikeOrDislikeCommentSchema,
-} from "../dtos/Comment/likeOrDislikeComment.dto";
+} from "../dtos/comment/likeOrDislikeComment.dto";
 
 export class CommentController {
   constructor(private commentBusiness: CommentBusiness) {}
