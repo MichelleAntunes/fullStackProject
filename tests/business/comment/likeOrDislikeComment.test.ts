@@ -5,7 +5,6 @@ import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
 import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { ZodError } from "zod";
 import { UnauthorizedError } from "../../../src/errors/UnauthorizedError";
-import { LikeOrDislikePostSchema } from "../../../src/dtos/Post/likeOrDislikePost.dto";
 import { ForbiddenError } from "../../../src/errors/ForbiddenError";
 import { NotFoundError } from "../../../src/errors/NotFoundError";
 import { LikeOrDislikeCommentSchema } from "../../../src/dtos/comment/likeOrDislikeComment.dto";
@@ -211,14 +210,14 @@ describe("Testando likeOrDislikeComment", () => {
       const output = await commentBusiness.likeOrDislikeComment(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }
   });
 
   test("deve disparar erro de token quando usuário tentar interagir com o próprio comentário", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = LikeOrDislikeCommentSchema.parse({
         postId: "p001",

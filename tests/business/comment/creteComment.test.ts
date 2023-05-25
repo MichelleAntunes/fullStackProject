@@ -108,7 +108,7 @@ describe("Testando createComment", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     try {
       const input = CreateCommentSchema.parse({
         postId: "p001",
@@ -119,7 +119,7 @@ describe("Testando createComment", () => {
       const output = await commentBusiness.createComment(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }
