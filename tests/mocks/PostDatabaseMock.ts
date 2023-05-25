@@ -10,6 +10,7 @@ import { usersMock } from "./UserDatabaseMock";
 import { UserDB } from "../../src/models/User";
 import { CommentDB, CommentWithCreatorDB } from "../../src/models/Comment";
 import { commentsMock } from "./CommentDatabaseMock";
+import { PostDatabase } from "../../src/database/PostDatabase";
 
 const postsMock: PostDB[] = [
   {
@@ -52,7 +53,7 @@ export const likesOrDislikesPostMock: LikeDislikePostDB[] = [
   },
 ];
 
-export class PostDatabaseMock extends BaseDatabase {
+export class PostDatabaseMock extends PostDatabase {
   public async getPostsWithCreator(
     query: string | undefined
   ): Promise<PostDBWithCreatorName[]> {
@@ -211,11 +212,11 @@ export class PostDatabaseMock extends BaseDatabase {
     }
   }
 
-  public async insertPost(postDB: PostDB): Promise<void> {}
+  // public async insertPost(postDB: PostDB): Promise<void> {}
 
-  public async updatePostById(postDB: PostDB): Promise<void> {}
+  // public async updatePostById(postDB: PostDB): Promise<void> {}
 
-  public async deletePostById(idToDelete: string): Promise<void> {}
+  // public async deletePostById(idToDelete: string): Promise<void> {}
 
   public async getLikeDislikeFromPostById(
     likeDislikePostDB: LikeDislikePostDB
