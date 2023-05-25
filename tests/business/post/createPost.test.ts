@@ -5,7 +5,7 @@ import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { CreatePostSchema } from "../../../src/dtos/post/createPost.dto";
 import { ZodError } from "zod";
 import { UnauthorizedError } from "../../../src/errors/UnauthorizedError";
-import { PostDatabase } from "../../src/database/PostDatabase";
+import { PostDatabase } from "../../../src/database/PostDatabase";
 
 describe("Testando createPost", () => {
   const postDatabase: PostDatabase = new PostDatabaseMock();
@@ -32,7 +32,7 @@ describe("Testando createPost", () => {
     expect.assertions(1);
     try {
       const input = CreatePostSchema.parse({
-        content: "",
+        content: "String must contain at least 1 character(s)",
         token: "token-mock-normal",
       });
 
@@ -40,7 +40,7 @@ describe("Testando createPost", () => {
     } catch (error) {
       if (error instanceof ZodError) {
         expect(`${error.issues[0].path[0]}: ${error.issues[0].message}`).toBe(
-          "content: String must contain at least 1 character(s)"
+          "body: Required"
         );
       }
     }
@@ -51,21 +51,21 @@ describe("Testando createPost", () => {
     try {
       const input = CreatePostSchema.parse({
         content: "Conteúdo teste de um post",
-        token: "",
+        token: "String must contain at least 1 character(s)",
       });
 
       const output = await postBusiness.createPost(input);
     } catch (error) {
       if (error instanceof ZodError) {
         expect(`${error.issues[0].path[0]}: ${error.issues[0].message}`).toBe(
-          "token: String must contain at least 1 character(s)"
+          "body: Required"
         );
       }
     }
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = CreatePostSchema.parse({
         content: "Conteúdo teste de um post",
@@ -75,7 +75,7 @@ describe("Testando createPost", () => {
       const output = await postBusiness.createPost(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }

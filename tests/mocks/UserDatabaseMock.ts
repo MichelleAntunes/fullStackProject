@@ -1,5 +1,6 @@
 import { USER_ROLES, UserDB } from "../../src/models/User";
 import { BaseDatabase } from "../../src/database/BaseDatabase";
+import { UserDatabase } from "../../src/database/UserDatabase";
 
 export const usersMock: UserDB[] = [
   {
@@ -28,7 +29,7 @@ export const usersMock: UserDB[] = [
   },
 ];
 
-export class UserDatabaseMock extends BaseDatabase {
+export class UserDatabaseMock extends UserDatabase {
   public async getUsers(q: string | undefined): Promise<UserDB[]> {
     if (q) {
       return usersMock.filter((user) =>
@@ -53,7 +54,7 @@ export class UserDatabaseMock extends BaseDatabase {
     return usersMock.filter((user) => user.email === email)[0];
   }
 
-  public async insertUser(newUserDB: UserDB): Promise<void> {}
+  // public async insertUser(newUserDB: UserDB): Promise<void> {}
 
   public async editUserById(userDB: UserDB): Promise<void> {}
 

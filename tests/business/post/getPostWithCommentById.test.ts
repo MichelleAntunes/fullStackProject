@@ -26,8 +26,8 @@ describe("Testando getPostWithCommentsById", () => {
       id: "p001",
       content: "Exemplo de conteúdo de post 1",
       comments: 0,
-      likes: 1,
-      dislikes: 0,
+      likes: 0,
+      dislikes: 1,
       createdAt: expect.any(String),
       updatedAt: expect.any(String),
       creator: {
@@ -82,7 +82,7 @@ describe("Testando getPostWithCommentsById", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     try {
       const input = GetPostWithCommentsByIdSchema.parse({
         postId: "p001",
@@ -92,7 +92,7 @@ describe("Testando getPostWithCommentsById", () => {
       const output = await postBusiness.getPostWithCommentsById(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }

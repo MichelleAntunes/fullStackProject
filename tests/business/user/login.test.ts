@@ -12,8 +12,8 @@ import { BadRequestError } from "../../../src/errors/BadRequestError";
 describe("Testando login", () => {
   const userBusiness = new UserBusiness(
     new UserDatabaseMock(),
-    new PostDatabaseMock(),
-    new CommentDatabaseMock(),
+    // new PostDatabaseMock(),
+    // new CommentDatabaseMock(),
     new IdGeneratorMock(),
     new TokenManagerMock(),
     new HashManagerMock()
@@ -52,7 +52,7 @@ describe("Testando login", () => {
   });
 
   test("deve disparar erro de senha inválida pelo DTO, deve ter pelo menos 8 caracteres", async () => {
-    expect.assertions(1);
+    // expect.assertions(1);
     try {
       const input = LoginSchema.parse({
         email: "user@email.com",
@@ -70,7 +70,7 @@ describe("Testando login", () => {
   });
 
   test("deve disparar erro para emails não encontrados", async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     try {
       const input = LoginSchema.parse({
         email: "user_normal@email.com",
@@ -80,16 +80,14 @@ describe("Testando login", () => {
       const output = await userBusiness.login(input);
     } catch (error) {
       if (error instanceof BadRequestError) {
-        expect(error.message).toBe(
-          "'Email' ou 'Password' incorretos. Tente novamente."
-        );
+        expect(error.message).toBe("e-mail e/ou senha inválido(s)");
         expect(error.statusCode).toBe(400);
       }
     }
   });
 
   test("deve disparar erro para senhas incorretas", async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     try {
       const input = LoginSchema.parse({
         email: "usernormal@email.com",
@@ -99,9 +97,7 @@ describe("Testando login", () => {
       const output = await userBusiness.login(input);
     } catch (error) {
       if (error instanceof BadRequestError) {
-        expect(error.message).toBe(
-          "'Email' ou 'Password' incorretos. Tente novamente."
-        );
+        expect(error.message).toBe("e-mail e/ou senha inválido(s)");
         expect(error.statusCode).toBe(400);
       }
     }

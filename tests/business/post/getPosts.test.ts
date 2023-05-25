@@ -104,7 +104,7 @@ describe("Testando getPosts", () => {
       const output = await postBusiness.getPosts(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }

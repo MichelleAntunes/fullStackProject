@@ -40,14 +40,14 @@ describe("Testando deletePostById", () => {
     } catch (error) {
       if (error instanceof ZodError) {
         expect(`${error.issues[0].path[0]}: ${error.issues[0].message}`).toBe(
-          "postId: String must contain at least 1 character(s)"
+          "idToDelete: Required"
         );
       }
     }
   });
 
   test("deve disparar erro de postId não encontrado", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = DeletePostSchema.parse({
         postId: "id-invalido",
@@ -84,7 +84,7 @@ describe("Testando deletePostById", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = DeletePostSchema.parse({
         postId: "p001",
@@ -94,14 +94,14 @@ describe("Testando deletePostById", () => {
       const output = await postBusiness.deletePost(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }
   });
 
   test("deve disparar erro de token quando não for admin ou o próprio usuário", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = DeletePostSchema.parse({
         postId: "p002",

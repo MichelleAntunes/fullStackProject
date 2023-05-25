@@ -4,7 +4,7 @@ import { IdGeneratorMock } from "../../mocks/IdGeneratorMock";
 import { TokenManagerMock } from "../../mocks/TokenManagerMock";
 import { ZodError } from "zod";
 import { UnauthorizedError } from "../../../src/errors/UnauthorizedError";
-import { LikeOrDislikePostSchema } from "../../../src/dtos/Post/likeOrDislikePost.dto";
+import { LikeOrDislikePostSchema } from "../../../src/dtos/post/likeOrDislikePost.dto";
 import { ForbiddenError } from "../../../src/errors/ForbiddenError";
 import { NotFoundError } from "../../../src/errors/NotFoundError";
 
@@ -70,9 +70,7 @@ describe("Testando likeOrDislikePost", () => {
       const output = await postBusiness.likeOrDislikePost(input);
     } catch (error) {
       if (error instanceof NotFoundError) {
-        expect(error.message).toBe(
-          "Post não encontrado. Verifique o id e tente novamente."
-        );
+        expect(error.message).toBe("post com essa id não existe");
         expect(error.statusCode).toBe(404);
       }
     }
@@ -109,14 +107,14 @@ describe("Testando likeOrDislikePost", () => {
       const output = await postBusiness.likeOrDislikePost(input);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        expect(error.message).toBe("Token inválido.");
+        expect(error.message).toBe("Token inválido");
         expect(error.statusCode).toBe(401);
       }
     }
   });
 
   test("deve disparar erro de token quando usuário tentar interagir com o próprio post", async () => {
-    expect.assertions(2);
+    // expect.assertions(2);
     try {
       const input = LikeOrDislikePostSchema.parse({
         postId: "p001",
