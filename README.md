@@ -71,6 +71,10 @@ $ npm run test
 11. [Roteamento](https://acervolima.com/roteamento-em-node-js/)
 12. [Postman](https://www.postman.com/)
 
+## Status do projeto
+
+Em processo. ⏳
+
 ## Autoria
 
 Michelle Antunes, maio/2023.
