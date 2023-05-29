@@ -48,8 +48,12 @@ $ npm install
 # Execute a aplicação
 $ npm run dev
 
-# A aplicação será iniciada na porta 3004, acesse pelo navegador: http://localhost:3003
+# A aplicação será iniciada na porta 3003, acesse pelo navegador: http://localhost:3003
 
+# Use algum API Client para realizar as requisições
+
+# Execute todos os testes unitários
+$ npm run test
 ```
 
 ## Técnologias utilizadas
