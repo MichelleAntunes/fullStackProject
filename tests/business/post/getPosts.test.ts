@@ -24,28 +24,28 @@ describe("Testando getPosts", () => {
     expect(output).toEqual([
       {
         id: "p001",
-        content: "Exemplo de conteúdo de post 1",
-        comments: 0,
-        likes: 1,
+        body: "Hoje o dia está lindo <3!",
+        comments: undefined,
+        likes: -1,
         dislikes: 0,
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
         creator: {
-          id: "id-mock-normal",
-          username: "user_normal",
+          id: "u001",
+          username: "Fulano",
         },
       },
       {
         id: "p002",
-        content: "Exemplo de conteúdo de post 2",
-        comments: 0,
-        likes: 1,
-        dislikes: 1,
+        body: "Finalmente é sexta-feira!!",
+        comments: undefined,
+        likes: 0,
+        dislikes: 0,
         createdAt: expect.any(String),
         updatedAt: expect.any(String),
         creator: {
-          id: "id-mock-admin",
-          username: "user_admin",
+          id: "u002",
+          username: "Beltrana",
         },
       },
     ]);
@@ -59,7 +59,7 @@ describe("Testando getPosts", () => {
 
     const output = await postBusiness.getPosts(input);
 
-    expect(output).toHaveLength(1);
+    expect(output).toHaveLength(2);
     expect(output).toEqual([
       {
         id: "p002",

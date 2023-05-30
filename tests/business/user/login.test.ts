@@ -70,7 +70,7 @@ describe("Testando login", () => {
   });
 
   test("deve disparar erro para emails não encontrados", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = LoginSchema.parse({
         email: "user_normal@email.com",
@@ -87,7 +87,7 @@ describe("Testando login", () => {
   });
 
   test("deve disparar erro para senhas incorretas", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = LoginSchema.parse({
         email: "usernormal@email.com",

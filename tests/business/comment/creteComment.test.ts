@@ -108,7 +108,7 @@ describe("Testando createComment", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = CreateCommentSchema.parse({
         postId: "p001",
