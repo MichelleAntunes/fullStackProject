@@ -17,7 +17,11 @@ O Labook é uma rede social com o objetivo de promover a conexão e interação 
 
 ## Documentação da API
 
-[Link Demonstração](https://documenter.getpostman.com/view/25825355/2s93m8z19F)
+[Link Documentação](https://documenter.getpostman.com/view/25825355/2s93m8z19F)
+
+[Link Front-End Deploy](https://full-stack-frontend-pi.vercel.app/)
+
+[Link Front-End Repositório](https://github.com/MichelleAntunes/fullStack_Frontend)
 
 ## Estruturação do banco de dados
 
