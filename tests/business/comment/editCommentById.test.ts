@@ -94,7 +94,7 @@ describe("Testando editCommentById", () => {
   });
 
   test("deve disparar erro de commentId não encontrado", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = EditCommentByIdSchema.parse({
         postId: "p001",
@@ -155,7 +155,7 @@ describe("Testando editCommentById", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = EditCommentByIdSchema.parse({
         postId: "p001",

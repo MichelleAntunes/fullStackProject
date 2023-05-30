@@ -82,7 +82,7 @@ describe("Testando getPostWithCommentsById", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = GetPostWithCommentsByIdSchema.parse({
         postId: "p001",

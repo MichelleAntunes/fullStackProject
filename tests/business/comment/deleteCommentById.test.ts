@@ -130,7 +130,7 @@ describe("Testando deleteCommentById", () => {
   });
 
   test("deve disparar erro de token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     try {
       const input = DeleteCommentByIdSchema.parse({
         postId: "p001",
